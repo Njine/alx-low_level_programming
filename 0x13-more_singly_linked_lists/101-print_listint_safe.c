@@ -1,43 +1,48 @@
 #include "lists.h"
+#include <stdio.h>
 
 /**
- * print_listint_safe - prints a linked list safely
- * @head: pointer to the first node in the linked list
- *
- * Return: number of nodes in the list
- */
-size_t print_listint_safe(const listint_t *head)
+* looped_listint_len - Counts the number of unique nodes
+* in a looped listint_t linked list.
+* @head: A pointer to the head of the listint_t to check.
+*
+* Return: If the list is not looped - 0.
+* Otherwise - the number of unique nodes in the list.
+*/
+size_t looped_listint_len(const listint_t *head)
 {
-	const listint_t *slow, *fast;
-	size_t count = 0;
+const listint_t *carrot = head, *stick = head;
+size_t nodes = 0;
 
-	slow = fast = head;
+while (stick && stick->next)
+{
+stick = stick->next->next;
+carrot = carrot->next;
 
-	while (fast && fast->next)
-	{
-		count++;
-		printf("[%p] %d\n", (void *)slow, slow->n);
-		slow = slow->next;
-		fast = fast->next->next;
+if (stick == carrot)
+{
+nodes++;
 
-		if (slow == fast)
-		{
-			printf("[%p] %d\n", (void *)slow, slow->n);
-			count++;
-			break;
-		}
-	}
-
-	if (!fast)
-	{
-		while (slow)
-		{
-			count++;
-			printf("[%p] %d\n", (void *)slow, slow->n);
-			slow = slow->next;
-		}
-	}
-
-	return (count);
+stick = head;
+while (carrot != stick)
+{
+nodes++;
+carrot = carrot->next;
+stick = stick->next;
 }
+
+carrot = carrot->next;
+while (carrot != stick)
+{
+nodes++;
+carrot = carrot->next;
+}
+
+return (nodes);
+}
+}
+
+return (0);
+}
+
 
