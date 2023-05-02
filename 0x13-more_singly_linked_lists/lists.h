@@ -5,13 +5,13 @@
 #include <stdlib.h>
 
 /**
-
-struct listint_s - singly linked list node
-@n: integer data stored in the node
-@next: pointer to the next node in the list
-Description: defines a node structure for a singly linked list
-used in Holberton project
-*/
+ * struct listint_s - singly linked list node
+ * @n: integer data stored in the node
+ * @next: pointer to the next node in the list
+ *
+ * Description: defines a node structure for a singly linked list
+ * used in the alx project
+ */
 typedef struct listint_s
 {
 	int n;
