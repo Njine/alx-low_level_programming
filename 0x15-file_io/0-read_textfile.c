@@ -1,20 +1,20 @@
-#include "main.h"
+#include <stdio.h>
+#include <stdlib.h>
 #include <fcntl.h>
 #include <unistd.h>
-#include <stdlib.h>
 
 /**
-* read_textfile - Reads a text file and prints it to the POSIX standard output.
-* @filename: The name of the file to be read.
-* @letters: The maximum number of letters to be read and printed.
-*
-* Return: The actual number of letters that were read and printed.
+* read_textfile- Read text file print to STDOUT.
+* @filename: text file being read
+* @letters: number of letters to be read
+* Return: w- actual number of bytes read and printed
+*        0 when function fails or filename is NULL.
 */
 ssize_t read_textfile(const char *filename, size_t letters)
 {
-int fd;
 char *buf;
-ssize_t rd, wr, total = 0;
+int fd;
+ssize_t w, t;
 
 if (filename == NULL)
 return (0);
@@ -23,31 +23,31 @@ fd = open(filename, O_RDONLY);
 if (fd == -1)
 return (0);
 
-buf = malloc(sizeof(char) * (letters + 1));
+buf = malloc(sizeof(char) * letters);
 if (buf == NULL)
 {
 close(fd);
 return (0);
 }
 
-while ((rd = read(fd, buf, letters)) > 0)
-{
-wr = write(STDOUT_FILENO, buf, rd);
-if (wr == -1)
+t = read(fd, buf, letters);
+if (t == -1)
 {
 free(buf);
 close(fd);
 return (0);
 }
-total += wr;
+
+w = write(STDOUT_FILENO, buf, t);
+if (w == -1 || w != t)
+{
+free(buf);
+close(fd);
+return (0);
 }
 
 free(buf);
 close(fd);
-
-if (rd == -1)
-return (0);
-
-return (total);
+return (w);
 }
 
