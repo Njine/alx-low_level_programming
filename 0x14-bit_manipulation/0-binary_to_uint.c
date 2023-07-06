@@ -17,15 +17,12 @@ unsigned int binary_to_uint(const char *b)
 	/* Return 0 if input string is NULL */
 	if (b == NULL)
 		return (0);
-
-	
 	/* Check if each character in string is a '0' or '1' */
 	for (lan = 0; b[lan]; lan++)
 	{
 		if (b[lan] != '0' && b[lan] != '1')
 			return (0);
 	}
-	
 	/* Convert the binary string to an unsigned integer */
 	for (lan--; lan >= 0; lan--, power *= 2)
 	{
