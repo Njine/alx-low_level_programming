@@ -9,15 +9,15 @@
 #define BUFFER_SIZE 64
 
 /**
-* main - Entry point for ELF header reader program
-* Description: program reads ELF header from file and writes information
-* @argc: number of command-line arguments
-* @argv: array of commandline argument strings
-* Returns: 0 on success, 98 on failure
+* main - Entry point for the ELF header reader program
+* Description: program reads ELF header from file and prints information
+* @argc: The number of command-line arguments.
+* @argv: An array of command-line argument strings.
+* Returns: 0 on success, 98 on failure.
 */
 int main(int argc, char *argv[])
 {
-int cm;
+int fd;
 Elf64_Ehdr header;
 
 if (argc != 2)
@@ -26,14 +26,14 @@ fprintf(stderr, "Usage: %s elf_filename\n", argv[0]);
 return (98);
 }
 
-cm = open(argv[1], O_RDONLY);
-if (cm == -1)
+fd = open(argv[1], O_RDONLY);
+if (fd == -1)
 {
 fprintf(stderr, "Error: Cannot open file '%s'\n", argv[1]);
 return (98);
 }
 
-if (read_header(cm, &header) == -1)
+if (read_header(fd, &header) == -1)
 {
 fprintf(stderr, "Error: Cannot read header of file '%s'\n", argv[1]);
 return (98);
@@ -49,26 +49,26 @@ print_osabi(&header);
 print_type(&header);
 print_entry(&header);
 
-close(cm);
+close(fd);
 return (0);
 }
 
 /**
 * read_header - Reads the ELF header of a file into a header struct.
-* @su: The file descriptor of the ELF file.
+* @fd: The file descriptor of the ELF file.
 * @header: A pointer to an ELF header struct to read into.
 *
 * Description: function reads the ELF header of a file into a header struct.
 * Returns: 0 on success, -1 on failure.
 */
-int read_header(int su, Elf64_Ehdr *header)
+int read_header(int fd, Elf64_Ehdr *header)
 {
-if (lseek(su, 0, SEEK_SET) == -1)
+if (lseek(fd, 0, SEEK_SET) == -1)
 {
 return (-1);
 }
 
-if (read(su, header, sizeof(*header)) != sizeof(*header))
+if (read(fd, header, sizeof(*header)) != sizeof(*header))
 {
 return (-1);
 }
@@ -95,25 +95,26 @@ exit(98);
 }
 
 /**
-* print_magic - Prints magic numbers of ELF header
-* @header: A pointer to ELF header.
+* print_magic - Prints the magic numbers of an ELF header.
+* @header: A pointer to an ELF header.
 *
 * Description: Magic numbers are separated by spaces.
 */
 void print_magic(Elf64_Ehdr *header)
 {
-int f;
+int i;
 printf("  Magic:   ");
-for (f = 0; f < EI_NIDENT; f++)
+for (i = 0; i < EI_NIDENT; i++)
 {
-printf("%02x ", header->e_ident[f]);
+printf("%02x ", header->e_ident[i]);
 }
 printf("\n");
 }
 
 /**
-* print_class - Prints ELF header class.
-* @header: A pointer to ELF header.
+* print_class - Prints the ELF header class.
+* @header: A pointer to an ELF header.
 *
 * Description: Possible values are "ELF32" or "EL
 */
+
