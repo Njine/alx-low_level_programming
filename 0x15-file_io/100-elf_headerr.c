@@ -6,18 +6,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int read_header(int fd, Elf64_Ehdr *header);
-void check_elf(Elf64_Ehdr *header);
-void print_magic(Elf64_Ehdr *header);
-void print_class(Elf64_Ehdr *header);
-void print_data(Elf64_Ehdr *header);
-void print_version(Elf64_Ehdr *header);
-void print_abi(Elf64_Ehdr *header);
-void print_osabi(Elf64_Ehdr *header);
-void print_type(Elf64_Ehdr *header);
-void print_entry(Elf64_Ehdr *header);
-
-
 #define BUFFER_SIZE 64
 
 /**
