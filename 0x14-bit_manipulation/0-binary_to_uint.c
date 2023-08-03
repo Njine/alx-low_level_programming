@@ -2,16 +2,16 @@
 #include <stdio.h>
 
 /**
- * binary_to_uint - converts a binary number represented as a string to an
+ * binary_to_uint - converts binary no string to
  * unsigned integer
- * @b: pointer to the binary string to be converted
- * Return: the converted decimal number, or 0 if there is an unconvertible
+ * @b: pointer to binary string for convertion
+ * Return: converted decimal number, or 0 if there is an unconvertible
  * character
  */
 unsigned int binary_to_uint(const char *b)
 {
-	unsigned int total = 0;
-	unsigned int power = 1;
+	unsigned int sum = 0;
+	unsigned int expo = 1;
 	int lan;
 
 	/* Return 0 if input string is NULL */
@@ -24,12 +24,12 @@ unsigned int binary_to_uint(const char *b)
 			return (0);
 	}
 	/* Convert the binary string to an unsigned integer */
-	for (lan--; lan >= 0; lan--, power *= 2)
+	for (lan--; lan >= 0; lan--, expo *= 2)
 	{
 		if (b[lan] == '1')
-			total += power;
+			sum += expo;
 	}
 
-		return (total);
+		return (sum);
 }
 

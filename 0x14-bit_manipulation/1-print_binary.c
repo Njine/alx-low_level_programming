@@ -2,7 +2,7 @@
 #include <stdio.h>
 
 /**
-* print_binary - print binary image of number
+* print_binary - print binary image of no
 * @n: decimal no to print as binary
 */
 void print_binary(unsigned long int n)
