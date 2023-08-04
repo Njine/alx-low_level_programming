@@ -2,13 +2,13 @@
 #include <stdio.h>
 
 /**
-* print_binary - print binary image of number
-* @n: decimal no to print as binary
+* print_binary - print binary image of a no
+* @n: decimal no to print binary
 */
 void print_binary(unsigned long int n)
 {
-unsigned long int var;
-int numbit = 0;
+int bitnum = 0;
+unsigned long int alt;
 
 if (n == 0)
 {
@@ -16,20 +16,20 @@ putchar('0');
 return;
 }
 
-var = n;
-while (var > 0)
+alt = n;
+while (alt > 0)
 {
-numbit++;
-var >>= 1;
+bitnum++;
+alt >>= 1;
 }
 
-while (numbit > 0)
+while (bitnum > 0)
 {
-if ((n >> (numbit - 1)) & 1)
+if ((n >> (bitnum - 1)) & 1)
 putchar('1');
 else
 putchar('0');
-numbit--;
+bitnum--;
 }
 }
 

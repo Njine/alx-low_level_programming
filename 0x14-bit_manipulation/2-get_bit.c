@@ -5,7 +5,7 @@
  * @n: the no to search.
  * @index: the index of the bit.
  *
- * Return: the value of bit at index, or -1 if an error occurred.
+ * Return: value of bit at ind, or -1 if an error.
  */
 int get_bit(unsigned long int n, unsigned int index)
 {
